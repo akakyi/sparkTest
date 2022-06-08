@@ -1,9 +1,7 @@
 package sparkTest.entity
 
-import java.util.UUID
-
 data class TableNameEntity(
-    val id: UUID,
+    val id: String,
     val col1: String,
     val col2: Int
 )

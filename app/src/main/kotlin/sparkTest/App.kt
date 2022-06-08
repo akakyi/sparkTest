@@ -17,20 +17,12 @@ fun main() {
         .appName("sparkTest")
         .getOrCreate()
 
-//    val dataFrame = session.read()
-//        .format("jdbc")
-//        .option("url", "jdbc:postgresql://localhost:5432/sparktest")
-//        .option("dbtable", "public.table_name")
-//        .option("user", "postgres")
-//        .option("password", "postgres")
-//        .load()
-
     val rows = generateSequence(0) { it + 1 }
         .take(10000)
         .toList()
         .map {
             TableNameEntity(
-                UUID.randomUUID(),
+                UUID.randomUUID().toString(),
                 UUID.randomUUID().toString(),
                 it
             )
@@ -46,3 +38,7 @@ fun main() {
         .mode(SaveMode.Append)
         .save()
 }
+
+//fun UUID.toString(): String {
+//    return "cast(${this.toString()}) as uuid)"
+//}
