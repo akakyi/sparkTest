@@ -3,9 +3,10 @@
  */
 package sparkTest
 
-import sparkTest.usecases.InsertDataInStoreUseCase
+import sparkTest.usecases.ReadFromStoreAndPushToQueueUseCase
 
 fun main() {
-    val useCase = InsertDataInStoreUseCase()
+//    val useCase = InsertDataInStoreUseCase()
+    val useCase = ReadFromStoreAndPushToQueueUseCase()
     useCase.execute()
 }

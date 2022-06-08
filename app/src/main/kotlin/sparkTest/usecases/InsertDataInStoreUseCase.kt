@@ -5,7 +5,7 @@ import org.apache.spark.sql.SparkSession
 import sparkTest.entity.TableNameEntity
 import java.util.*
 
-class InsertDataInStoreUseCase() {
+class InsertDataInStoreUseCase {
 
     private val session: SparkSession
 
