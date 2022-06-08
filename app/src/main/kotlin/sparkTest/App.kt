@@ -3,6 +3,7 @@
  */
 package sparkTest
 
+import org.apache.spark.sql.SaveMode
 import org.apache.spark.sql.SparkSession
 import sparkTest.entity.TableNameEntity
 import java.util.*
@@ -37,9 +38,11 @@ fun main() {
     val frameToWrite = session.createDataFrame(rows, TableNameEntity::class.java)
     frameToWrite.write()
         .format("jdbc")
+        .option("driver", "org.postgresql.Driver")
         .option("url", "jdbc:postgresql://localhost:5432/sparktest")
         .option("dbtable", "public.table_name")
         .option("user", "postgres")
         .option("password", "postgres")
+        .mode(SaveMode.Append)
         .save()
 }
