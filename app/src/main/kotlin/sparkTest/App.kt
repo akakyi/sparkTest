@@ -3,13 +3,43 @@
  */
 package sparkTest
 
-class App {
-    val greeting: String
-        get() {
-            return "Hello World!"
-        }
-}
+import org.apache.spark.sql.SparkSession
+import sparkTest.entity.TableNameEntity
+import java.util.*
 
 fun main() {
-    println(App().greeting)
+//    val sparkConf = SparkConf()
+//    sparkConf.setAppName("sparkTest")
+//
+//    val sparkContext = SparkContext(sparkConf)
+    val session = SparkSession.builder()
+        .appName("sparkTest")
+        .getOrCreate()
+
+//    val dataFrame = session.read()
+//        .format("jdbc")
+//        .option("url", "jdbc:postgresql://localhost:5432/sparktest")
+//        .option("dbtable", "public.table_name")
+//        .option("user", "postgres")
+//        .option("password", "postgres")
+//        .load()
+
+    val rows = generateSequence(0) { it + 1 }
+        .take(10000)
+        .toList()
+        .map {
+            TableNameEntity(
+                UUID.randomUUID(),
+                UUID.randomUUID().toString(),
+                it
+            )
+        }
+    val frameToWrite = session.createDataFrame(rows, TableNameEntity::class.java)
+    frameToWrite.write()
+        .format("jdbc")
+        .option("url", "jdbc:postgresql://localhost:5432/sparktest")
+        .option("dbtable", "public.table_name")
+        .option("user", "postgres")
+        .option("password", "postgres")
+        .save()
 }

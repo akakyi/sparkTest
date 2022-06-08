@@ -29,7 +29,8 @@ dependencies {
     // This dependency is used by the application.
     implementation("com.google.guava:guava:30.1.1-jre")
 
-    implementation("org.apache.spark:spark-core_2.10:1.6.0")
+    implementation("org.apache.spark:spark-core_2.13:3.2.1")
+    implementation("org.apache.spark:spark-sql_2.13:3.2.1")
 
     // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")
