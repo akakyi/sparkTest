@@ -20,11 +20,12 @@ class InsertDataInStoreUseCase {
             .take(10000)
             .toList()
             .map {
-                TableNameEntity(
-                    UUID.randomUUID().toString(),
-                    UUID.randomUUID().toString(),
-                    it
-                )
+                val tableNameEntity = TableNameEntity()
+                tableNameEntity.id = UUID.randomUUID().toString()
+                tableNameEntity.col1 = UUID.randomUUID().toString()
+                tableNameEntity.col2 = it
+
+                return@map tableNameEntity
             }
         val frameToWrite = session.createDataFrame(rows, TableNameEntity::class.java)
         //TODO вынести в конфиги

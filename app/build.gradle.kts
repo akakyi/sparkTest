@@ -31,6 +31,7 @@ dependencies {
 
     compileOnly("org.apache.spark:spark-core_2.13:3.2.1")
     compileOnly("org.apache.spark:spark-sql_2.13:3.2.1")
+    implementation("org.apache.spark:spark-sql-kafka-0-10_2.12:3.2.1")
 
     implementation("org.postgresql:postgresql:42.3.3")
 

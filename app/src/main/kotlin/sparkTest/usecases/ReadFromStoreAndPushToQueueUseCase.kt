@@ -37,12 +37,12 @@ class ReadFromStoreAndPushToQueueUseCase : Serializable {
                 mappper.writeValueAsString(it)
             }
 
-        session.createDataFrame(jsonsRdd, String::class.java)
-            .write()
-            .format("kafka")
-            .option("kafka.bootstrap.servers", "localhost:9092")
-            .option("topic", "sparkTestTopic")
-            .save()
+//        session.createDataFrame(jsonsRdd, Test::class.java)
+//            .write()
+//            .format("kafka")
+//            .option("kafka.bootstrap.servers", "localhost:9092")
+//            .option("topic", "sparkTestTopic")
+//            .save()
     }
 
 }
