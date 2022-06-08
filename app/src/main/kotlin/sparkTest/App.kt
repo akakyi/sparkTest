@@ -3,42 +3,9 @@
  */
 package sparkTest
 
-import org.apache.spark.sql.SaveMode
-import org.apache.spark.sql.SparkSession
-import sparkTest.entity.TableNameEntity
-import java.util.*
+import sparkTest.usecases.InsertDataInStoreUseCase
 
 fun main() {
-//    val sparkConf = SparkConf()
-//    sparkConf.setAppName("sparkTest")
-//
-//    val sparkContext = SparkContext(sparkConf)
-    val session = SparkSession.builder()
-        .appName("sparkTest")
-        .getOrCreate()
-
-    val rows = generateSequence(0) { it + 1 }
-        .take(10000)
-        .toList()
-        .map {
-            TableNameEntity(
-                UUID.randomUUID().toString(),
-                UUID.randomUUID().toString(),
-                it
-            )
-        }
-    val frameToWrite = session.createDataFrame(rows, TableNameEntity::class.java)
-    frameToWrite.write()
-        .format("jdbc")
-        .option("driver", "org.postgresql.Driver")
-        .option("url", "jdbc:postgresql://localhost:5432/sparktest")
-        .option("dbtable", "public.table_name")
-        .option("user", "postgres")
-        .option("password", "postgres")
-        .mode(SaveMode.Append)
-        .save()
+    val useCase = InsertDataInStoreUseCase()
+    useCase.execute()
 }
-
-//fun UUID.toString(): String {
-//    return "cast(${this.toString()}) as uuid)"
-//}
